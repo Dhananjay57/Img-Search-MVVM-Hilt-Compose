@@ -24,8 +24,7 @@ class ImageSearchViewModel @Inject constructor(private val repository: ImageRepo
         imageList.value = DataState(isLoading = true)
 
         try {
-            val result = repository.search(query)
-            when (result) {
+            when (val result = repository.search(query)) {
                 is Resource.Error -> {
                     imageList.value = DataState(error = "Something went wrong")
                 }
@@ -34,7 +33,6 @@ class ImageSearchViewModel @Inject constructor(private val repository: ImageRepo
                     result.data?.hits?.let {
                         imageList.value = DataState(data = it)
                     }
-
                 }
 
                 is Resource.Loading -> imageList.value = DataState(isLoading = true)
@@ -43,6 +41,5 @@ class ImageSearchViewModel @Inject constructor(private val repository: ImageRepo
             imageList.value = DataState(error = "Something went wrong")
         }
     }
-
 
 }

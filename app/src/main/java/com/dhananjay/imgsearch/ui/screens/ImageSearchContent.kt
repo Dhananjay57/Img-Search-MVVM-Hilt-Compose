@@ -64,7 +64,7 @@ import java.time.format.DateTimeFormatter
 
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalCoroutinesApi::class, FlowPreview::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun ImageSearchContent(imageSearchViewModel: ImageSearchViewModel = hiltViewModel()) {
@@ -125,9 +125,9 @@ fun ImageSearchContent(imageSearchViewModel: ImageSearchViewModel = hiltViewMode
                     }
                 )
             }
-            if(isConnected.not()){
+            if (isConnected.not()) {
                 Box(
-                     modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     Text(text = stringResource(R.string.there_is_no_internet))
                 }
@@ -193,7 +193,7 @@ fun ImageSearchContent(imageSearchViewModel: ImageSearchViewModel = hiltViewMode
 @Composable
 fun MainContentItem(imageList: ImagesData) {
     val currentLocalDateTime = LocalDateTime.now()
-    val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm am/pm")
+    val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy")
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -215,7 +215,7 @@ fun MainContentItem(imageList: ImagesData) {
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "Total views: ${imageList.views} ${currentLocalDateTime.format(dateFormatter)}", // Replace with your title text
+            text = "Total views: ${imageList.views} ${currentLocalDateTime.format(dateFormatter)}",
             style = TextStyle(fontWeight = FontWeight.SemiBold),
             modifier = Modifier
                 .fillMaxWidth()
